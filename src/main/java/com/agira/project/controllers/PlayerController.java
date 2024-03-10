@@ -1,7 +1,7 @@
 package com.agira.project.controllers;
 
-import com.agira.project.models.Player;
-import com.agira.project.models.Team;
+import com.agira.project.Dtos.PlayerReponseDto;
+import com.agira.project.Dtos.PlayerRequestDto;
 import com.agira.project.services.PlayerService;
 import com.agira.project.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/team/player")
@@ -17,19 +18,23 @@ public class PlayerController {
     PlayerService playerService;
     @Autowired
     TeamService teamService;
-    @PostMapping("/save/{id}")
-    public ResponseEntity<Player> savePlayer(@RequestBody @Valid Player player, @PathVariable Long id) {
-        Team team = teamService.getTeam(id);
-        player.setTeam(team);
-        playerService.savePlayer(player);
-        return ResponseEntity.ok(player);
+    @PostMapping("/")
+    public ResponseEntity<PlayerReponseDto> savePlayer(@RequestBody @Valid PlayerRequestDto playerRequestDto) {
+        PlayerReponseDto playerReponseDto = playerService.savePlayer(playerRequestDto);
+        return ResponseEntity.ok(playerReponseDto);
+
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Player> getPlayer(@PathVariable Long id){
+    public ResponseEntity<PlayerReponseDto> getPlayer(@PathVariable Long id){
         return ResponseEntity.ok(playerService.getPlayer(id));
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Player> deletePlayer(@PathVariable Long id){
+    @DeleteMapping("/signout/{id}")
+    public ResponseEntity<PlayerReponseDto> deletePlayer(@PathVariable Long id){
         return  ResponseEntity.ok(playerService.deletePlayer(id));
     }
+    @GetMapping("/info")
+    public ResponseEntity<List<PlayerReponseDto>> getAllPlayers(){
+        return  ResponseEntity.ok(playerService.getAllPlayers());
+    }
+
 }

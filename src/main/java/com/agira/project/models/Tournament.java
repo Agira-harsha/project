@@ -16,8 +16,9 @@ import java.util.List;
 @Data
 public class Tournament {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long tournamentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long tournamentId;
+    @Column(unique = true)
     @NotNull
     private String tournamentName;
     @NotNull

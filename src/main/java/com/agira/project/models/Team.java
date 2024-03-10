@@ -15,13 +15,16 @@ import java.util.List;
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long teamId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long teamId;
     @Column(unique = true)
     @NotNull
     private String teamName;
     @OneToMany(mappedBy = "team",cascade = CascadeType.ALL )
     @JsonIgnore
     private List<Player> playersList = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

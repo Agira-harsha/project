@@ -13,8 +13,8 @@ import javax.validation.constraints.Null;
 @Entity
 public class Player {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long playerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long playerId;
     @NotNull
     private String playerName;
     @NotNull

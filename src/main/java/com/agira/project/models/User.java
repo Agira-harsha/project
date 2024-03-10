@@ -1,30 +1,37 @@
 package com.agira.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.agira.project.validPassword.ValidPassword;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.GeneratorType;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
+    private String userName;
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
     private String email;
-
-    @NotBlank(message = "Password is required")
     private String password;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Team team;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<TournamentRegistration> tournamentRegistrations;
 
-    // Constructors, getters, and setters
-
-    public User() {
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    // Getters and setters
-    // Omitted for brevity
 }

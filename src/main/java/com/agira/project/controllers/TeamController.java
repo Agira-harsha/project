@@ -1,23 +1,44 @@
 package com.agira.project.controllers;
 
+import com.agira.project.Dtos.TeamReponseDto;
+import com.agira.project.Dtos.TeamRequestDto;
 import com.agira.project.models.Team;
 import com.agira.project.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/team")
 public class TeamController {
     @Autowired
     TeamService teamService;
-    @PostMapping("/save")
-    public void saveTeam(@RequestBody Team team){
-        teamService.saveTeam(team);
+
+    @PostMapping("/")
+    public ResponseEntity<TeamReponseDto> saveTeam(@RequestBody @Valid TeamRequestDto teamRequestDto) {
+        return teamService.saveTeam(teamRequestDto);
     }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Team> deleteTeam(@PathVariable Long id){
-        Team team = teamService.deleteTeam(id);
+
+    @GetMapping("/login/{id}")
+    public ResponseEntity<TeamReponseDto> getTeam(@PathVariable long id) {
+        TeamReponseDto team = teamService.getTeam(id);
         return ResponseEntity.ok(team);
     }
+
+    @DeleteMapping("/signout/{id}")
+    public ResponseEntity<TeamReponseDto> deleteTeam(@PathVariable long id) {
+        TeamReponseDto team = teamService.deleteTeam(id);
+        return ResponseEntity.ok(team);
+    }
+    @GetMapping
+    public ResponseEntity<List<TeamReponseDto>> getAllTeams() {
+        List<TeamReponseDto> teams = teamService.getAllTeams();
+        return  ResponseEntity.ok(teams);
+    }
+
+
 }
