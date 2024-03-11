@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/tournament-registrations")
 public class TournamentRegistrationController {
@@ -24,6 +26,11 @@ public class TournamentRegistrationController {
     @GetMapping("/success")
     public ResponseEntity<RegistrationResponseDto>getTransaction(Long id){
        return  ResponseEntity.ok(registrationService.getRegisterDetailsByID(id));
+    }
+    @GetMapping("/histry")
+    public ResponseEntity<List<RegistrationResponseDto>> getHistory(){
+        List<RegistrationResponseDto> history = registrationService.getHistory();
+        return ResponseEntity.ok(history);
     }
 
 }

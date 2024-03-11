@@ -57,7 +57,8 @@ public class UserService {
 
     public List<UserResponseDto> getAllUsers() {
         List<User> all = userReposiotry.findAll();
-        List<UserResponseDto> collect = all.stream().map(user -> mapper.userToResponseDto(user)).collect(Collectors.toList());
+        List<UserResponseDto> collect = all
+                .stream().map(user -> mapper.userToResponseDto(user)).collect(Collectors.toList());
         return collect;
     }
 }
