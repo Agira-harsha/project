@@ -1,11 +1,14 @@
 package com.agira.project.services;
 
-import com.agira.project.models.Tournament;
+import com.agira.project.Dtos.TeamReponseDto;
+import com.agira.project.models.*;
 import com.agira.project.repository.TournamentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TournamentService {
@@ -34,4 +37,25 @@ public class TournamentService {
     public void deleteTournament(Long id) {
         tournamentRepository.deleteById(id);
     }
+    public List<TeamReponseDto>registerTeams(Long id){
+
+        Tournament tournament = tournamentRepository.findById(id).get();
+        List<TournamentRegistration> registrations = tournament.getRegistrations();
+        return registrations.stream()
+                .map(registration -> {
+                    Tournament team = registration.getTournament();
+                    User user = registration.getUser();
+                    Team team1 = user.getTeam();
+
+
+                    TeamReponseDto teamReponseDto = new TeamReponseDto();
+
+                  teamReponseDto.setTeamId(team1.getTeamId());
+                  teamReponseDto.setTeamName(team1.getTeamName());
+                  teamReponseDto.setAdmin(user.getUserName());
+                    return teamReponseDto;
+                })
+                .collect(Collectors.toList());
+    }
+
 }

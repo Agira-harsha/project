@@ -28,5 +28,10 @@ public class Tournament {
     private LocalDate startDate;
     @NotNull
     private LocalTime startTime;
+    @OneToMany(mappedBy = "tournament")
+    @JsonIgnore
+    private List<TournamentRegistration> registrations;
+
+
 
 }

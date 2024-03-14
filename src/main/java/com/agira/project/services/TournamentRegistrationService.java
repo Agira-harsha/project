@@ -3,10 +3,12 @@ package com.agira.project.services;
 import com.agira.project.Dtos.RegistrationResponseDto;
 import com.agira.project.Dtos.TournamentRegistrationRequestDto;
 import com.agira.project.Utility.Mapper;
+import com.agira.project.models.Team;
 import com.agira.project.models.TournamentRegistration;
 import com.agira.project.repository.TournamentRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,4 +36,7 @@ public class TournamentRegistrationService {
       return  all.stream().map(registration -> mapper.entityToResponse(registration)).collect(Collectors.toList());
 
     }
+//    public List<Team>RegisterTeams(Long id){
+//         tournamentRegistrationRepository.
+//    }
 }

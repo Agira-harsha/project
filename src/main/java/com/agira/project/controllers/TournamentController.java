@@ -1,5 +1,6 @@
 package com.agira.project.controllers;
 
+import com.agira.project.Dtos.TeamReponseDto;
 import com.agira.project.models.Tournament;
 import com.agira.project.services.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,9 @@ public class TournamentController {
     public ResponseEntity<Void> deleteTournament(@PathVariable Long id) {
         tournamentService.deleteTournament(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("registered-teams/{id}")
+    public List<TeamReponseDto>registerTeams(@PathVariable Long id){
+        return tournamentService.registerTeams(id);
     }
 }

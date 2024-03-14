@@ -1,6 +1,7 @@
 package com.agira.project.controllers;
 
 import com.agira.project.Dtos.UserLoginDto;
+import com.agira.project.appconfig.JwtTokenProvider;
 import com.agira.project.models.User;
 import com.agira.project.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,16 @@ public class AuthController {
     UserService userService;
     @Autowired
     AuthenticationManager authenticationManager;
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
    public ResponseEntity<String>loginUser(@RequestBody @Valid UserLoginDto loginDto){
        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
        SecurityContextHolder.getContext().setAuthentication(authenticate);
-       return  new ResponseEntity<>("user Login Successfully",HttpStatus.OK);
+       String token=jwtTokenProvider.generateToken(authenticate);
+
+       return  new ResponseEntity<>(token,HttpStatus.OK);
    }
 }
 

@@ -8,9 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CorporateCricketApplication.class, args);
-		System.out.println("Database Connected succefully " +
+		System.out.println("Database Connected successfully " +
 				"\nHappy cricket :)");
 	}
-
 
 }
