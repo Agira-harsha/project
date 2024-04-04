@@ -60,7 +60,13 @@ public class Mapper {
         Player player = new Player();
         long teamId = playerRequestDto.getTeamId();
         Team team = teamRepository.findById(teamId).get();
-        player.setTeam(team);
+        if (!team.isFull()) {
+            team.addPlayer(player);
+            player.setTeam(team);
+        } else {
+            throw new IllegalStateException("Team is already full");
+        }
+
         player.setPlayerName(playerRequestDto.getPlayerName());
         player.setRole(playerRequestDto.getRole());
         return player;
@@ -89,7 +95,8 @@ public class Mapper {
         responseDto.setAdmin(registration.getUser().getUserName());
         responseDto.setTournamentName(registration.getTournament().getTournamentName());
         responseDto.setWinPrice(registration.getTournament().getPrice());
-//        responseDto.setTeamName(registration.getUser().getTeam().getTeamName());
+        responseDto.setUserId(registration.getUser().getUserId());
+        responseDto.setTourId(registration.getTournament().getTournamentId());
         return responseDto;
     }
 }

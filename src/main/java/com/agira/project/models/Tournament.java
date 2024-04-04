@@ -4,12 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,7 +29,16 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament")
     @JsonIgnore
     private List<TournamentRegistration> registrations;
-
+    public boolean isFull() {
+        return registrations.size() >= 6;
+    }
+    public void addRegistration(TournamentRegistration registration) {
+        if (!isFull()) {
+            registrations.add(registration);
+        } else {
+            throw new IllegalStateException("Tournament is already full");
+        }
+    }
 
 
 }

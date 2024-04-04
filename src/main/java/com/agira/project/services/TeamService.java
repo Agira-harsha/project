@@ -1,8 +1,10 @@
 package com.agira.project.services;
 
+import com.agira.project.Dtos.PlayerReponseDto;
 import com.agira.project.Dtos.TeamReponseDto;
 import com.agira.project.Dtos.TeamRequestDto;
 import com.agira.project.Utility.Mapper;
+import com.agira.project.models.Player;
 import com.agira.project.models.Team;
 import com.agira.project.models.User;
 import com.agira.project.repository.TeamRepository;
@@ -10,6 +12,7 @@ import com.agira.project.repository.UserReposiotry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,4 +63,15 @@ public class TeamService {
 
         return collect;
     }
+    public List<Player> getPlayersByTeamId(Long id) {
+        Team team = teamRepository.findById(id).orElse(null);
+        if (team != null) {
+            return team.getPlayersList();
+        } else {
+            // Handle case where team with given ID is not found
+            // You can throw an exception, return an empty list, or handle it based on your application's requirements
+            return null;
+        }
+    }
+
 }

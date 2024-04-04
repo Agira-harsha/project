@@ -18,7 +18,7 @@ public class TeamRequestDto {
     @Pattern(regexp = "^[a-zA-Z]*$", message = "name must be letters")
     private String teamName;
     @NotNull
-    private long userId;
+        private long userId;
 
 
 }

@@ -5,12 +5,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class MatchWinnerDto {
-
-    private Long tournamentId;
-    private String tournamentName;
+public class MatchWinnerResponse {
+    private  Long teamId;
     private String  admin;
-    private String teamName;
     private double prize;
     private String status="Won";
 }

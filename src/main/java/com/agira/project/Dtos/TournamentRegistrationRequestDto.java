@@ -9,6 +9,6 @@ public class TournamentRegistrationRequestDto {
     @NotNull
     private Long userId;
     @NotNull
-    private Long tournamentId;
+        private Long tournamentId;
 
 }

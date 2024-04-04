@@ -26,7 +26,7 @@ public class UserController {
     public ResponseEntity<UserResponseDto>logInUser(@PathVariable long id){
         return userService.getUser(id);
     }
-    @PreAuthorize(value = "ROLE_ADMIN")
+
     @DeleteMapping("/{id}")
     public ResponseEntity<UserResponseDto>removeUser(@PathVariable long id)
     {

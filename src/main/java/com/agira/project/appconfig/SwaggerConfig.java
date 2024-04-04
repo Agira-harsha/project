@@ -14,7 +14,6 @@ public class SwaggerConfig
     @Bean
     public Docket api()
     {
-//creating constructor of Docket class that accepts parameter DocumentationType
         return new Docket(DocumentationType.SWAGGER_2);
     }
 }

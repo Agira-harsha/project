@@ -4,6 +4,7 @@ import com.agira.project.Dtos.PlayerReponseDto;
 import com.agira.project.Dtos.PlayerRequestDto;
 import com.agira.project.Utility.Mapper;
 import com.agira.project.models.Player;
+import com.agira.project.models.TournamentRegistration;
 import com.agira.project.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,13 @@ public class PlayerService {
         List<PlayerReponseDto> collect = all.stream().map(player -> mapper.playerToplayerReponseDto(player)).collect(Collectors.toList());
         return  collect;
 
+
+    }
+    public List<PlayerReponseDto> getTeamPlayers(Long id){
+        List<Player> players = playerRepository.getPlayers(id);
+
+        List<PlayerReponseDto> collect = players.stream().map(player -> mapper.playerToplayerReponseDto(player)).collect(Collectors.toList());
+      return  collect;
 
     }
 }

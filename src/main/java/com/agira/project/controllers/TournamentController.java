@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tournament")
+@RequestMapping("tournament")
 public class TournamentController {
     @Autowired
     TournamentService tournamentService;

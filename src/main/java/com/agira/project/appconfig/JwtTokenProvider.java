@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +13,11 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    private String jwtSecret = "d22da6ab7dc87f033c6a73e1162cca3eb87778f6c52af66aa1a9a99aa1a95bf9";
 
-    private long jwtExpiration = 86400000;
+    private String jwtSecret ="d22da6ab7dc87f033c6a73e1162cca3eb87778f6c52af66aa1a9a99aa1a95bf9";
+
+
+    private long jwtExpiration =8600000;
 
 
     public String generateToken(Authentication authentication) {

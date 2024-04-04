@@ -8,8 +8,9 @@ import lombok.Setter;
 public class RegistrationResponseDto {
     private Long registerId;
     private String admin;
-//    private  String teamName;
     private  String tournamentName;
     private double winPrice;
+    private Long userId;
+    private Long tourId;
 
 }

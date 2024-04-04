@@ -20,12 +20,20 @@ public class Team {
     @Column(unique = true)
     @NotNull
     private String teamName;
-    @OneToMany(mappedBy = "team",cascade = CascadeType.ALL )
+    @OneToMany(mappedBy = "team",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Player> playersList = new ArrayList<>();
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-
+    public boolean isFull() {
+        return playersList.size() >= 14;
+    }
+    public void addPlayer(Player player) {
+        if (!isFull()) {
+            playersList.add(player);
+        } else {
+            throw new IllegalStateException("Team is already full");
+        }
+    }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tournament-registrations")
+@RequestMapping("tournament-registrations")
 public class TournamentRegistrationController {
 
     @Autowired
@@ -32,5 +32,8 @@ public class TournamentRegistrationController {
         List<RegistrationResponseDto> history = registrationService.getHistory();
         return ResponseEntity.ok(history);
     }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<List<RegistrationResponseDto>> getRegisterdTeams(@PathVariable Long id){
+        return ResponseEntity.ok(registrationService.registerdTeams(id));
+    }
 }
