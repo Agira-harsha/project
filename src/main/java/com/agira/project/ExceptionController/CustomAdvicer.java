@@ -85,5 +85,13 @@ public class CustomAdvicer {
         error.put("error", e.getMessage());
         return error;
     }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(RuntimeException.class)
+    public Map<String, String> runtime(RuntimeException e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", e.getMessage());
+        return error;
+    }
+
 
 }

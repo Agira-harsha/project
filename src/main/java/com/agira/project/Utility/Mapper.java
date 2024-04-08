@@ -99,4 +99,5 @@ public class Mapper {
         responseDto.setTourId(registration.getTournament().getTournamentId());
         return responseDto;
     }
+
 }

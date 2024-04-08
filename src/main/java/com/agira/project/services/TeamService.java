@@ -68,8 +68,7 @@ public class TeamService {
         if (team != null) {
             return team.getPlayersList();
         } else {
-            // Handle case where team with given ID is not found
-            // You can throw an exception, return an empty list, or handle it based on your application's requirements
+
             return null;
         }
     }

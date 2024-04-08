@@ -8,4 +8,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface MatchWinnerRepository extends JpaRepository<MatchWinner,Long> {
 
+
 }

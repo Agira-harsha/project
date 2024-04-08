@@ -29,6 +29,11 @@ public class Tournament {
     @OneToMany(mappedBy = "tournament")
     @JsonIgnore
     private List<TournamentRegistration> registrations;
+
+    @OneToMany(mappedBy = "tournament")
+    @JsonIgnore
+    private List<ScheduledMatches> scheduledMatches;
+    @JsonIgnore
     public boolean isFull() {
         return registrations.size() >= 6;
     }

@@ -47,7 +47,6 @@ public class TournamentService {
                     User user = registration.getUser();
                     Team team1 = user.getTeam();
 
-
                     TeamReponseDto teamReponseDto = new TeamReponseDto();
 
                   teamReponseDto.setTeamId(team1.getTeamId());
